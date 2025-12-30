@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Word, supabase } from '../lib/supabase'
+import type { Word } from '../lib/supabase'
+import { supabase } from '../lib/supabase'
 import { WordCard } from './WordCard'
 
 interface WordListProps {
