@@ -5,25 +5,19 @@ interface WordInputProps {
   onWordAdded: () => void
 }
 
-const COLORS = [
-  { value: '', label: 'Sin color' },
-  { value: 'blue', label: 'Azul 🔵', class: 'bg-blue-500' },
-  { value: 'green', label: 'Verde 🟢', class: 'bg-green-500' },
-  { value: 'red', label: 'Rojo 🔴', class: 'bg-red-500' },
-  { value: 'purple', label: 'Morado 🟣', class: 'bg-purple-500' },
-  { value: 'yellow', label: 'Amarillo 🟡', class: 'bg-yellow-500' },
-  { value: 'orange', label: 'Naranja 🟠', class: 'bg-orange-500' },
+const CATEGORIES = [
+  { value: '', label: 'Sin categoría', color: '' },
+  { value: 'sustantivo', label: 'Sustantivo', color: 'blue' },
+  { value: 'adjetivo', label: 'Adjetivo', color: 'green' },
+  { value: 'verbo', label: 'Verbo', color: 'purple' },
+  { value: 'phrasal verb', label: 'Phrasal Verb', color: 'orange' },
+  { value: 'adverbio', label: 'Adverbio', color: 'yellow' },
+  { value: 'frase hecha', label: 'Frase Hecha', color: 'red' },
 ]
 
-const CATEGORIES = [
-  { value: '', label: 'Sin categoría' },
-  { value: 'sustantivo', label: 'Sustantivo' },
-  { value: 'adjetivo', label: 'Adjetivo' },
-  { value: 'verbo', label: 'Verbo' },
-  { value: 'phrasal verb', label: 'Phrasal Verb' },
-  { value: 'adverbio', label: 'Adverbio' },
-  { value: 'frase hecha', label: 'Frase Hecha' },
-]
+const getCategoryColor = (categoria: string) => {
+  return CATEGORIES.find(c => c.value === categoria)?.color || ''
+}
 
 interface PreviewData {
   originalWord: string
@@ -38,7 +32,6 @@ export function WordInput({ onWordAdded }: WordInputProps) {
   const [includeImage, setIncludeImage] = useState(true)
   const [preview, setPreview] = useState<PreviewData | null>(null)
   const [categoria, setCategoria] = useState('')
-  const [color, setColor] = useState('')
   const [notas, setNotas] = useState('')
 
   const handleTranslate = async () => {
@@ -89,12 +82,15 @@ export function WordInput({ onWordAdded }: WordInputProps) {
 
     setLoading(true)
     try {
+      // Auto-assign color based on category
+      const autoColor = getCategoryColor(categoria)
+
       const { error: dbError } = await supabase.from('palabras').insert({
         palabra_original: preview.originalWord,
         traduccion: preview.translation,
         imagen_url: preview.imageUrl,
         categoria: categoria || null,
-        color: color || null,
+        color: autoColor || null,
         notas: notas || null,
       })
 
@@ -104,7 +100,6 @@ export function WordInput({ onWordAdded }: WordInputProps) {
       setWord('')
       setPreview(null)
       setCategoria('')
-      setColor('')
       setNotas('')
       onWordAdded()
     } catch (err) {
@@ -117,12 +112,19 @@ export function WordInput({ onWordAdded }: WordInputProps) {
   const handleCancel = () => {
     setPreview(null)
     setCategoria('')
-    setColor('')
     setNotas('')
   }
 
   if (preview) {
-    const colorClass = COLORS.find(c => c.value === color)?.class || ''
+    const categoryColor = getCategoryColor(categoria)
+    const colorClasses: Record<string, string> = {
+      blue: 'bg-blue-500',
+      green: 'bg-green-500',
+      purple: 'bg-purple-500',
+      orange: 'bg-orange-500',
+      yellow: 'bg-yellow-500',
+      red: 'bg-red-500',
+    }
 
     return (
       <div className="space-y-6">
@@ -142,37 +144,24 @@ export function WordInput({ onWordAdded }: WordInputProps) {
           </div>
 
           <div className="space-y-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-medium text-neutral-500 mb-2 uppercase tracking-wide">Categoría</label>
-                <select
-                  value={categoria}
-                  onChange={(e) => setCategoria(e.target.value)}
-                  className="w-full px-4 py-2.5 border border-neutral-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-400 text-sm bg-white"
-                >
-                  {CATEGORIES.map(cat => (
-                    <option key={cat.value} value={cat.value}>{cat.label}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-neutral-500 mb-2 uppercase tracking-wide">Color</label>
-                <select
-                  value={color}
-                  onChange={(e) => setColor(e.target.value)}
-                  className="w-full px-4 py-2.5 border border-neutral-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-400 text-sm bg-white"
-                >
-                  {COLORS.map(col => (
-                    <option key={col.value} value={col.value}>{col.label}</option>
-                  ))}
-                </select>
-              </div>
+            <div>
+              <label className="block text-xs font-medium text-neutral-500 mb-2 uppercase tracking-wide">Categoría</label>
+              <select
+                value={categoria}
+                onChange={(e) => setCategoria(e.target.value)}
+                className="w-full px-4 py-2.5 border border-neutral-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-400 text-sm bg-white"
+              >
+                {CATEGORIES.map(cat => (
+                  <option key={cat.value} value={cat.value}>{cat.label}</option>
+                ))}
+              </select>
+              {categoryColor && (
+                <div className="mt-3 flex items-center gap-2 text-xs text-neutral-500">
+                  <div className={`w-3 h-3 rounded-full ${colorClasses[categoryColor]}`}></div>
+                  <span>Color asignado automáticamente</span>
+                </div>
+              )}
             </div>
-
-            {color && (
-              <div className={`h-1 rounded-full ${colorClass}`}></div>
-            )}
 
             <div>
               <label className="block text-xs font-medium text-neutral-500 mb-2 uppercase tracking-wide">Notas</label>

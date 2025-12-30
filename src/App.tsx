@@ -9,7 +9,7 @@ function App() {
     <div className="min-h-screen bg-neutral-50">
       {/* Header - minimal y elegante */}
       <header className="bg-white border-b border-neutral-200">
-        <div className="max-w-5xl mx-auto px-6 py-8 md:py-12">
+        <div className="max-w-3xl mx-auto px-6 py-8 md:py-12">
           <h1 className="text-3xl md:text-4xl font-light text-neutral-900 text-center tracking-tight">
             Yo te traduzco
           </h1>
@@ -19,8 +19,8 @@ function App() {
         </div>
       </header>
 
-      {/* Main content con constraints */}
-      <main className="max-w-5xl mx-auto px-6 py-12 md:py-16 space-y-16">
+      {/* Main content con constraints - ancho reducido */}
+      <main className="max-w-3xl mx-auto px-6 py-12 md:py-16 space-y-16">
         {/* Sección de traducción */}
         <section>
           <WordInput onWordAdded={() => setRefreshTrigger(prev => prev + 1)} />
@@ -36,7 +36,7 @@ function App() {
       </main>
 
       {/* Footer minimal */}
-      <footer className="max-w-5xl mx-auto px-6 py-12 text-center text-sm text-neutral-400 border-t border-neutral-200 mt-16">
+      <footer className="max-w-3xl mx-auto px-6 py-12 text-center text-sm text-neutral-400 border-t border-neutral-200 mt-16">
         <p>Hecho con Claude Code</p>
       </footer>
     </div>
