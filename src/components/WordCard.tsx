@@ -51,7 +51,7 @@ export function WordCard({ word, onUpdate }: WordCardProps) {
 
   return (
     <div className={cn(
-      "border-l-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-200 overflow-hidden",
+      "border-l-4 bg-white rounded-xl border border-neutral-100 hover:shadow-lg transition-all duration-200 overflow-hidden",
       colorClass
     )}>
       <div className="md:flex">
@@ -69,17 +69,17 @@ export function WordCard({ word, onUpdate }: WordCardProps) {
         ) : null}
 
         {/* Content section */}
-        <div className="flex-1 p-5">
-          <div className="flex items-start justify-between mb-3">
+        <div className="flex-1 p-6">
+          <div className="flex items-start justify-between mb-4">
             <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-2xl font-bold text-gray-900">{word.palabra_original}</span>
-                <span className="text-gray-400 text-xl">→</span>
-                <span className="text-xl text-gray-700">{word.traduccion}</span>
+              <div className="flex items-baseline gap-4 mb-3">
+                <span className="text-2xl font-light text-neutral-900">{word.palabra_original}</span>
+                <span className="text-neutral-300">→</span>
+                <span className="text-xl text-neutral-600">{word.traduccion}</span>
               </div>
 
               {categoryData && (
-                <span className="inline-flex items-center gap-1 px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-neutral-50 text-neutral-600 text-xs font-medium rounded-full border border-neutral-200">
                   <span>{categoryData.emoji}</span>
                   <span>{categoryData.label}</span>
                 </span>
@@ -88,21 +88,21 @@ export function WordCard({ word, onUpdate }: WordCardProps) {
 
             <button
               onClick={() => isEditing ? handleSave() : setIsEditing(true)}
-              className="ml-2 text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors"
+              className="ml-4 text-xs text-neutral-500 hover:text-neutral-900 font-medium transition-colors uppercase tracking-wide"
             >
-              {isEditing ? '💾 Guardar' : '✏️ Editar'}
+              {isEditing ? 'Guardar' : 'Editar'}
             </button>
           </div>
 
           {isEditing ? (
-            <div className="space-y-3 mt-4 pt-4 border-t">
-              <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-4 mt-6 pt-6 border-t border-neutral-100">
+              <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Categoría</label>
+                  <label className="block text-xs font-medium text-neutral-500 mb-2 uppercase tracking-wide">Categoría</label>
                   <select
                     value={categoria}
                     onChange={(e) => setCategoria(e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-400 bg-white"
                   >
                     <option value="">Sin categoría</option>
                     {CATEGORIES.map(cat => (
@@ -114,11 +114,11 @@ export function WordCard({ word, onUpdate }: WordCardProps) {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-gray-600 mb-1">Color</label>
+                  <label className="block text-xs font-medium text-neutral-500 mb-2 uppercase tracking-wide">Color</label>
                   <select
                     value={color}
                     onChange={(e) => setColor(e.target.value)}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-400 bg-white"
                   >
                     <option value="">Sin color</option>
                     {COLORS.map(col => (
@@ -129,20 +129,20 @@ export function WordCard({ word, onUpdate }: WordCardProps) {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Notas</label>
+                <label className="block text-xs font-medium text-neutral-500 mb-2 uppercase tracking-wide">Notas</label>
                 <textarea
                   value={notas}
                   onChange={(e) => setNotas(e.target.value)}
                   placeholder="Añade notas, ejemplos..."
-                  className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 text-sm border border-neutral-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-400 resize-none"
                   rows={2}
                 />
               </div>
             </div>
           ) : (
             word.notas && (
-              <div className="mt-3 pt-3 border-t border-gray-100">
-                <p className="text-sm text-gray-600 italic">{word.notas}</p>
+              <div className="mt-4 pt-4 border-t border-neutral-100">
+                <p className="text-sm text-neutral-500 leading-relaxed">{word.notas}</p>
               </div>
             )
           )}

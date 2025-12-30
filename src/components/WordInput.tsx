@@ -125,77 +125,79 @@ export function WordInput({ onWordAdded }: WordInputProps) {
     const colorClass = COLORS.find(c => c.value === color)?.class || ''
 
     return (
-      <div className="space-y-4">
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border-2 border-blue-200">
+      <div className="space-y-6">
+        <div className="bg-white border border-neutral-200 rounded-xl p-8">
           {preview.imageUrl && (
             <img
               src={preview.imageUrl}
               alt={preview.originalWord}
-              className="w-full h-48 object-cover rounded-lg mb-4"
+              className="w-full h-56 object-cover rounded-lg mb-6"
             />
           )}
 
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-2xl font-bold text-gray-800">{preview.originalWord}</span>
-            <span className="text-gray-400">→</span>
-            <span className="text-2xl text-gray-700">{preview.translation}</span>
+          <div className="flex items-baseline gap-4 mb-8">
+            <span className="text-3xl font-light text-neutral-900">{preview.originalWord}</span>
+            <span className="text-neutral-300">→</span>
+            <span className="text-2xl text-neutral-600">{preview.translation}</span>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 mb-3">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
-              <select
-                value={categoria}
-                onChange={(e) => setCategoria(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                {CATEGORIES.map(cat => (
-                  <option key={cat.value} value={cat.value}>{cat.label}</option>
-                ))}
-              </select>
+          <div className="space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-medium text-neutral-500 mb-2 uppercase tracking-wide">Categoría</label>
+                <select
+                  value={categoria}
+                  onChange={(e) => setCategoria(e.target.value)}
+                  className="w-full px-4 py-2.5 border border-neutral-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-400 text-sm bg-white"
+                >
+                  {CATEGORIES.map(cat => (
+                    <option key={cat.value} value={cat.value}>{cat.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-neutral-500 mb-2 uppercase tracking-wide">Color</label>
+                <select
+                  value={color}
+                  onChange={(e) => setColor(e.target.value)}
+                  className="w-full px-4 py-2.5 border border-neutral-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-400 text-sm bg-white"
+                >
+                  {COLORS.map(col => (
+                    <option key={col.value} value={col.value}>{col.label}</option>
+                  ))}
+                </select>
+              </div>
             </div>
 
+            {color && (
+              <div className={`h-1 rounded-full ${colorClass}`}></div>
+            )}
+
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Color</label>
-              <select
-                value={color}
-                onChange={(e) => setColor(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                {COLORS.map(col => (
-                  <option key={col.value} value={col.value}>{col.label}</option>
-                ))}
-              </select>
+              <label className="block text-xs font-medium text-neutral-500 mb-2 uppercase tracking-wide">Notas</label>
+              <textarea
+                value={notas}
+                onChange={(e) => setNotas(e.target.value)}
+                placeholder="Añade contexto, ejemplos o recordatorios..."
+                className="w-full px-4 py-3 border border-neutral-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-400 text-sm resize-none"
+                rows={3}
+              />
             </div>
           </div>
 
-          {color && (
-            <div className={`h-2 rounded-full mb-3 ${colorClass}`}></div>
-          )}
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Notas (opcional)</label>
-            <textarea
-              value={notas}
-              onChange={(e) => setNotas(e.target.value)}
-              placeholder="Añade notas, ejemplos, contexto..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              rows={2}
-            />
-          </div>
-
-          <div className="flex gap-2">
+          <div className="flex gap-3 mt-8 pt-6 border-t border-neutral-100">
             <button
               onClick={handleSave}
               disabled={loading}
-              className="flex-1 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 font-medium transition-colors"
+              className="flex-1 px-6 py-3 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 disabled:opacity-50 font-medium transition-colors text-sm"
             >
-              {loading ? 'Guardando...' : 'Guardar Palabra'}
+              {loading ? 'Guardando...' : 'Guardar'}
             </button>
             <button
               onClick={handleCancel}
               disabled={loading}
-              className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 disabled:opacity-50 font-medium transition-colors"
+              className="px-6 py-3 bg-white border border-neutral-200 text-neutral-700 rounded-lg hover:bg-neutral-50 disabled:opacity-50 font-medium transition-colors text-sm"
             >
               Cancelar
             </button>
@@ -207,36 +209,34 @@ export function WordInput({ onWordAdded }: WordInputProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-col gap-3">
-        <div className="flex gap-2">
-          <input
-            type="text"
-            value={word}
-            onChange={(e) => setWord(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && !loading && handleTranslate()}
-            placeholder="Escribe una palabra o frase en inglés..."
-            disabled={loading}
-            className="flex-1 px-5 py-3 text-lg border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-          />
-          <button
-            onClick={handleTranslate}
-            disabled={loading || !word.trim()}
-            className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all hover:shadow-lg"
-          >
-            {loading ? 'Traduciendo...' : 'Traducir'}
-          </button>
-        </div>
-
-        <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={includeImage}
-            onChange={(e) => setIncludeImage(e.target.checked)}
-            className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-          />
-          Incluir imagen ilustrativa
-        </label>
+      <div className="flex flex-col sm:flex-row gap-3">
+        <input
+          type="text"
+          value={word}
+          onChange={(e) => setWord(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && !loading && handleTranslate()}
+          placeholder="Escribe una palabra o frase en inglés..."
+          disabled={loading}
+          className="flex-1 px-5 py-3.5 text-base border border-neutral-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-400 focus:border-neutral-400 transition-all bg-white"
+        />
+        <button
+          onClick={handleTranslate}
+          disabled={loading || !word.trim()}
+          className="px-8 py-3.5 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all text-sm"
+        >
+          {loading ? 'Traduciendo...' : 'Traducir'}
+        </button>
       </div>
+
+      <label className="flex items-center gap-2 text-sm text-neutral-500 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={includeImage}
+          onChange={(e) => setIncludeImage(e.target.checked)}
+          className="w-4 h-4 text-neutral-900 border-neutral-300 rounded focus:ring-neutral-400"
+        />
+        Incluir imagen ilustrativa
+      </label>
 
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">

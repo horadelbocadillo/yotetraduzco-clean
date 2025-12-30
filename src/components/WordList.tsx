@@ -47,15 +47,15 @@ export function WordList({ refreshTrigger }: WordListProps) {
   }, [refreshTrigger, search, categoryFilter])
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Search bar */}
       <div>
         <input
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="🔍 Buscar palabras..."
-          className="w-full px-5 py-3 text-lg border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          placeholder="Buscar palabras..."
+          className="w-full px-5 py-3.5 text-base border border-neutral-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-400 focus:border-neutral-400 transition-all bg-white"
         />
       </div>
 
@@ -63,10 +63,10 @@ export function WordList({ refreshTrigger }: WordListProps) {
       <div className="flex flex-wrap gap-2">
         <button
           onClick={() => setCategoryFilter('')}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+          className={`px-4 py-2 rounded-full text-xs font-medium transition-all uppercase tracking-wide ${
             categoryFilter === ''
-              ? 'bg-blue-600 text-white shadow-md'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              ? 'bg-neutral-900 text-white'
+              : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
           }`}
         >
           Todas
@@ -75,13 +75,13 @@ export function WordList({ refreshTrigger }: WordListProps) {
           <button
             key={cat.value}
             onClick={() => setCategoryFilter(cat.value)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+            className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${
               categoryFilter === cat.value
-                ? 'bg-blue-600 text-white shadow-md'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-neutral-900 text-white'
+                : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
             }`}
           >
-            <span className="mr-1">{cat.emoji}</span>
+            <span className="mr-1.5">{cat.emoji}</span>
             {cat.label}
           </button>
         ))}
@@ -89,32 +89,32 @@ export function WordList({ refreshTrigger }: WordListProps) {
 
       {/* Word count */}
       {!loading && words.length > 0 && (
-        <div className="text-sm text-gray-500">
+        <div className="text-xs text-neutral-400 uppercase tracking-wide">
           {words.length} {words.length === 1 ? 'palabra' : 'palabras'}
-          {categoryFilter && ` en ${CATEGORIES.find(c => c.value === categoryFilter)?.label}`}
+          {categoryFilter && ` · ${CATEGORIES.find(c => c.value === categoryFilter)?.label}`}
         </div>
       )}
 
       {/* Loading state */}
       {loading ? (
-        <div className="text-center py-12">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-          <p className="mt-2 text-gray-500">Cargando...</p>
+        <div className="text-center py-20">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-neutral-300"></div>
+          <p className="mt-4 text-neutral-400 text-sm">Cargando...</p>
         </div>
       ) : words.length === 0 ? (
-        <div className="text-center py-12">
-          <div className="text-6xl mb-4">📚</div>
-          <p className="text-gray-500 text-lg">
+        <div className="text-center py-20">
+          <div className="text-6xl mb-4 opacity-20">📚</div>
+          <p className="text-neutral-400 text-base">
             {search || categoryFilter
-              ? 'No se encontraron palabras con esos filtros'
-              : 'No hay palabras guardadas aún'}
+              ? 'No se encontraron palabras'
+              : 'No hay palabras guardadas'}
           </p>
-          <p className="text-gray-400 text-sm mt-2">
-            {!search && !categoryFilter && '¡Traduce tu primera palabra arriba!'}
+          <p className="text-neutral-300 text-sm mt-2">
+            {!search && !categoryFilter && 'Traduce tu primera palabra arriba'}
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           {words.map((word) => (
             <WordCard key={word.id} word={word} onUpdate={fetchWords} />
           ))}
