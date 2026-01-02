@@ -1,22 +1,10 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
+import { pronounceWord } from '../lib/utils'
+import { CATEGORIES, getCategoryColor, categoryDotVariants } from '../lib/constants'
 
 interface WordInputProps {
-  onWordAdded: () => void
-}
-
-const CATEGORIES = [
-  { value: '', label: 'Sin categoría', color: '' },
-  { value: 'sustantivo', label: 'Sustantivo', color: 'blue' },
-  { value: 'adjetivo', label: 'Adjetivo', color: 'green' },
-  { value: 'verbo', label: 'Verbo', color: 'purple' },
-  { value: 'phrasal verb', label: 'Phrasal Verb', color: 'orange' },
-  { value: 'adverbio', label: 'Adverbio', color: 'yellow' },
-  { value: 'frase hecha', label: 'Frase Hecha', color: 'red' },
-]
-
-const getCategoryColor = (categoria: string) => {
-  return CATEGORIES.find(c => c.value === categoria)?.color || ''
+  onWordAdded: (word: string) => void
 }
 
 interface PreviewData {
@@ -97,11 +85,12 @@ export function WordInput({ onWordAdded }: WordInputProps) {
       if (dbError) throw dbError
 
       // Reset all
+      const savedWord = preview.originalWord
       setWord('')
       setPreview(null)
       setCategoria('')
       setNotas('')
-      onWordAdded()
+      onWordAdded(savedWord)
     } catch (err) {
       setError((err as Error).message)
     } finally {
@@ -117,30 +106,50 @@ export function WordInput({ onWordAdded }: WordInputProps) {
 
   if (preview) {
     const categoryColor = getCategoryColor(categoria)
-    const colorClasses: Record<string, string> = {
-      blue: 'bg-blue-500',
-      green: 'bg-green-500',
-      purple: 'bg-purple-500',
-      orange: 'bg-orange-500',
-      yellow: 'bg-yellow-500',
-      red: 'bg-red-500',
-    }
 
     return (
       <div className="space-y-6">
-        <div className="bg-white border border-neutral-200 rounded-xl p-8">
+        <div className="bg-white border border-neutral-200 rounded-2xl p-8 shadow-soft-xl animate-slide-up">
           {preview.imageUrl && (
             <img
               src={preview.imageUrl}
               alt={preview.originalWord}
-              className="w-full h-56 object-cover rounded-lg mb-6"
+              className="w-full h-56 object-cover rounded-xl mb-6"
             />
           )}
 
-          <div className="flex items-baseline gap-4 mb-8">
-            <span className="text-3xl font-light text-neutral-900">{preview.originalWord}</span>
-            <span className="text-neutral-300">→</span>
-            <span className="text-2xl text-neutral-600">{preview.translation}</span>
+          <div className="flex flex-wrap items-center gap-4 mb-8">
+            <div className="flex items-center gap-2">
+              <span className="font-display text-3xl font-semibold text-neutral-900">{preview.originalWord}</span>
+              <button
+                onClick={() => pronounceWord(preview.originalWord, 'en-US')}
+                className="relative w-11 h-11 flex items-center justify-center border-2 border-neutral-200 bg-white hover:bg-neutral-50 hover:border-indigo-500 rounded-xl transition-all focus-ring group"
+                aria-label="Pronunciar palabra en inglés"
+              >
+                <span className="absolute -top-1.5 -right-1.5 bg-indigo-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">
+                  EN
+                </span>
+                <svg className="w-5 h-5 text-neutral-600 group-hover:text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                </svg>
+              </button>
+            </div>
+            <span className="text-neutral-300 text-xl">→</span>
+            <div className="flex items-center gap-2">
+              <span className="text-2xl text-neutral-700">{preview.translation}</span>
+              <button
+                onClick={() => pronounceWord(preview.translation, 'es-ES')}
+                className="relative w-11 h-11 flex items-center justify-center border-2 border-neutral-200 bg-white hover:bg-neutral-50 hover:border-emerald-500 rounded-xl transition-all focus-ring group"
+                aria-label="Pronunciar traducción en español"
+              >
+                <span className="absolute -top-1.5 -right-1.5 bg-emerald-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">
+                  ES
+                </span>
+                <svg className="w-5 h-5 text-neutral-600 group-hover:text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                </svg>
+              </button>
+            </div>
           </div>
 
           <div className="space-y-5">
@@ -157,7 +166,7 @@ export function WordInput({ onWordAdded }: WordInputProps) {
               </select>
               {categoryColor && (
                 <div className="mt-3 flex items-center gap-2 text-xs text-neutral-500">
-                  <div className={`w-3 h-3 rounded-full ${colorClasses[categoryColor]}`}></div>
+                  <div className={categoryDotVariants({ color: categoryColor as any, size: 'md' })}></div>
                   <span>Color asignado automáticamente</span>
                 </div>
               )}
@@ -179,14 +188,14 @@ export function WordInput({ onWordAdded }: WordInputProps) {
             <button
               onClick={handleSave}
               disabled={loading}
-              className="flex-1 px-6 py-3 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 disabled:opacity-50 font-medium transition-colors text-sm"
+              className="flex-1 px-6 py-3 bg-gradient-to-r from-indigo-600 to-violet-600 text-white rounded-xl hover:shadow-soft-md disabled:opacity-50 font-semibold transition-all text-sm focus-ring"
             >
               {loading ? 'Guardando...' : 'Guardar'}
             </button>
             <button
               onClick={handleCancel}
               disabled={loading}
-              className="px-6 py-3 bg-white border border-neutral-200 text-neutral-700 rounded-lg hover:bg-neutral-50 disabled:opacity-50 font-medium transition-colors text-sm"
+              className="px-6 py-3 bg-white border-2 border-neutral-200 text-neutral-700 rounded-xl hover:bg-neutral-50 disabled:opacity-50 font-semibold transition-all text-sm focus-ring"
             >
               Cancelar
             </button>
@@ -206,29 +215,34 @@ export function WordInput({ onWordAdded }: WordInputProps) {
           onKeyPress={(e) => e.key === 'Enter' && !loading && handleTranslate()}
           placeholder="Escribe una palabra o frase en inglés..."
           disabled={loading}
-          className="flex-1 px-5 py-3.5 text-base border border-neutral-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-neutral-400 focus:border-neutral-400 transition-all bg-white"
+          aria-label="Palabra o frase en inglés para traducir"
+          className="flex-1 px-5 py-4 text-base border-2 border-neutral-200 rounded-xl bg-neutral-50 focus:bg-white input-focus transition-all"
         />
         <button
           onClick={handleTranslate}
           disabled={loading || !word.trim()}
-          className="px-8 py-3.5 bg-neutral-900 text-white rounded-lg hover:bg-neutral-800 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-all text-sm"
+          className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-violet-600 text-white rounded-xl hover:shadow-soft-md disabled:opacity-50 disabled:cursor-not-allowed font-semibold transition-all text-sm btn-focus"
         >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+          </svg>
           {loading ? 'Traduciendo...' : 'Traducir'}
         </button>
       </div>
 
-      <label className="flex items-center gap-2 text-sm text-neutral-500 cursor-pointer">
+      <label className="flex items-center gap-2 text-sm text-neutral-600 cursor-pointer font-medium">
         <input
           type="checkbox"
           checked={includeImage}
           onChange={(e) => setIncludeImage(e.target.checked)}
-          className="w-4 h-4 text-neutral-900 border-neutral-300 rounded focus:ring-neutral-400"
+          aria-label="Incluir imagen ilustrativa"
+          className="w-5 h-5 text-indigo-600 border-neutral-300 rounded focus:ring-indigo-500"
         />
         Incluir imagen ilustrativa
       </label>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+        <div className="bg-red-50 border-2 border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm font-medium">
           {error}
         </div>
       )}

@@ -1,3 +1,107 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  /* Focus-visible global styles for accessibility */
+  *:focus {
+    outline: none;
+  }
+
+  *:focus-visible {
+    outline: 2px solid #6366f1;
+    outline-offset: 2px;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Font smoothing */
+  body {
+    @apply font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  /* Custom focus styles for interactive elements */
+  .focus-ring:focus-visible {
+    @apply ring-2 ring-indigo-500 ring-offset-2;
+  }
+
+  /* Custom focus style for inputs */
+  .input-focus:focus {
+    outline: none;
+    @apply ring-1 ring-indigo-500 border-indigo-500;
+  }
+
+  /* Button focus style */
+  .btn-focus:focus-visible {
+    @apply ring-4 ring-indigo-100;
+  }
+}
+
+@layer utilities {
+  /* Smooth animations */
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes slideInToast {
+    from {
+      transform: translateY(120%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    10%, 30% { transform: scale(1.1); }
+    20%, 40% { transform: scale(1); }
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out backwards;
+  }
+
+  .animate-toast {
+    animation: slideInToast 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+}
