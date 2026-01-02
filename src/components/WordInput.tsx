@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 import { pronounceWord } from '../lib/utils'
-import { CATEGORIES, getCategoryColor, categoryDotVariants } from '../lib/constants'
+import { CATEGORIES, getCategoryColor } from '../lib/constants'
 
 interface WordInputProps {
   onWordAdded: (word: string) => void
@@ -166,7 +166,7 @@ export function WordInput({ onWordAdded }: WordInputProps) {
               </select>
               {categoryColor && (
                 <div className="mt-3 flex items-center gap-2 text-xs text-neutral-500">
-                  <div className={categoryDotVariants({ color: categoryColor as any, size: 'md' })}></div>
+                  <div className={`w-3 h-3 rounded-full bg-${categoryColor}-500`}></div>
                   <span>Color asignado automáticamente</span>
                 </div>
               )}
