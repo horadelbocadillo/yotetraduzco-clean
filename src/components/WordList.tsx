@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { Word } from '../lib/supabase'
 import { supabase } from '../lib/supabase'
-import { pronounceWord } from '../lib/utils'
-import { CATEGORIES, getCategoryColor, categoryDotVariants, getCategory } from '../lib/constants'
+import { CATEGORIES, getCategory } from '../lib/constants'
 import { EmptyState } from './EmptyState'
 import { WordCard } from './WordCard'
 
