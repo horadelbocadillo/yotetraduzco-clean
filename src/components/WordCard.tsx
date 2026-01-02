@@ -88,13 +88,13 @@ export function WordCard({ word, onUpdate }: WordCardProps) {
                   <span className="font-display text-2xl font-semibold text-neutral-900">{word.palabra_original}</span>
                   <button
                     onClick={() => pronounceWord(word.palabra_original, 'en-US')}
-                    className="relative w-9 h-9 flex items-center justify-center border-2 border-neutral-200 bg-white hover:bg-neutral-50 hover:border-indigo-500 rounded-lg transition-all focus-ring group"
+                    className="relative w-11 h-11 flex items-center justify-center border-2 border-neutral-200 bg-white hover:bg-neutral-50 hover:border-indigo-500 rounded-lg transition-all focus-ring group"
                     aria-label="Pronunciar palabra en inglés"
                   >
-                    <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-[9px] font-bold px-1 py-0.5 rounded leading-none">
+                    <span className="absolute -top-1.5 -right-1.5 bg-indigo-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">
                       EN
                     </span>
-                    <svg className="w-4 h-4 text-neutral-600 group-hover:text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-neutral-600 group-hover:text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                     </svg>
                   </button>
@@ -106,13 +106,13 @@ export function WordCard({ word, onUpdate }: WordCardProps) {
                   <span className="text-xl text-neutral-700">{word.traduccion}</span>
                   <button
                     onClick={() => pronounceWord(word.traduccion, 'es-ES')}
-                    className="relative w-9 h-9 flex items-center justify-center border-2 border-neutral-200 bg-white hover:bg-neutral-50 hover:border-emerald-500 rounded-lg transition-all focus-ring group"
+                    className="relative w-11 h-11 flex items-center justify-center border-2 border-neutral-200 bg-white hover:bg-neutral-50 hover:border-emerald-500 rounded-lg transition-all focus-ring group"
                     aria-label="Pronunciar traducción en español"
                   >
-                    <span className="absolute -top-1 -right-1 bg-emerald-600 text-white text-[9px] font-bold px-1 py-0.5 rounded leading-none">
+                    <span className="absolute -top-1.5 -right-1.5 bg-emerald-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">
                       ES
                     </span>
-                    <svg className="w-4 h-4 text-neutral-600 group-hover:text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-neutral-600 group-hover:text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                     </svg>
                   </button>

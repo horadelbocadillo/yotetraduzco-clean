@@ -123,7 +123,7 @@ export function WordInput({ onWordAdded }: WordInputProps) {
               <span className="font-display text-3xl font-semibold text-neutral-900">{preview.originalWord}</span>
               <button
                 onClick={() => pronounceWord(preview.originalWord, 'en-US')}
-                className="relative w-11 h-11 flex items-center justify-center border-2 border-neutral-200 bg-white hover:bg-neutral-50 hover:border-indigo-500 rounded-xl transition-all focus-ring group"
+                className="relative w-11 h-11 flex items-center justify-center border-2 border-neutral-200 bg-white hover:bg-neutral-50 hover:border-indigo-500 rounded-lg transition-all focus-ring group"
                 aria-label="Pronunciar palabra en inglés"
               >
                 <span className="absolute -top-1.5 -right-1.5 bg-indigo-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">
@@ -139,7 +139,7 @@ export function WordInput({ onWordAdded }: WordInputProps) {
               <span className="text-2xl text-neutral-700">{preview.translation}</span>
               <button
                 onClick={() => pronounceWord(preview.translation, 'es-ES')}
-                className="relative w-11 h-11 flex items-center justify-center border-2 border-neutral-200 bg-white hover:bg-neutral-50 hover:border-emerald-500 rounded-xl transition-all focus-ring group"
+                className="relative w-11 h-11 flex items-center justify-center border-2 border-neutral-200 bg-white hover:bg-neutral-50 hover:border-emerald-500 rounded-lg transition-all focus-ring group"
                 aria-label="Pronunciar traducción en español"
               >
                 <span className="absolute -top-1.5 -right-1.5 bg-emerald-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">
