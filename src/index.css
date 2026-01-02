@@ -35,18 +35,21 @@
 @layer components {
   /* Custom focus styles for interactive elements */
   .focus-ring:focus-visible {
-    @apply ring-2 ring-indigo-500 ring-offset-2;
+    outline: none;
+    box-shadow: 0 0 0 2px #6366f1, 0 0 0 4px rgba(99, 102, 241, 0.2);
   }
 
   /* Custom focus style for inputs */
   .input-focus:focus {
     outline: none;
-    @apply ring-1 ring-indigo-500 border-indigo-500;
+    box-shadow: 0 0 0 1px #6366f1;
+    border-color: #6366f1;
   }
 
   /* Button focus style */
   .btn-focus:focus-visible {
-    @apply ring-4 ring-indigo-100;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
   }
 }
 
