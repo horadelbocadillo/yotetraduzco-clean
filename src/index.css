@@ -20,7 +20,7 @@
 
   /* Font smoothing */
   body {
-    @apply font-body;
+    font-family: 'DM Sans', -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
