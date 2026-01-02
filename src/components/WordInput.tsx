@@ -123,13 +123,11 @@ export function WordInput({ onWordAdded }: WordInputProps) {
               <span className="font-display text-3xl font-semibold text-neutral-900">{preview.originalWord}</span>
               <button
                 onClick={() => pronounceWord(preview.originalWord, 'en-US')}
-                className="relative w-11 h-11 flex items-center justify-center border-2 border-neutral-200 bg-white hover:bg-neutral-50 hover:border-indigo-500 rounded-lg transition-all focus-ring group"
+                className="pronunciation-btn"
                 aria-label="Pronunciar palabra en inglés"
               >
-                <span className="absolute -top-1.5 -right-1.5 bg-indigo-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">
-                  EN
-                </span>
-                <svg className="w-5 h-5 text-neutral-600 group-hover:text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span className="lang-badge">EN</span>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                 </svg>
               </button>
@@ -139,13 +137,11 @@ export function WordInput({ onWordAdded }: WordInputProps) {
               <span className="text-2xl text-neutral-700">{preview.translation}</span>
               <button
                 onClick={() => pronounceWord(preview.translation, 'es-ES')}
-                className="relative w-11 h-11 flex items-center justify-center border-2 border-neutral-200 bg-white hover:bg-neutral-50 hover:border-emerald-500 rounded-lg transition-all focus-ring group"
+                className="pronunciation-btn"
                 aria-label="Pronunciar traducción en español"
               >
-                <span className="absolute -top-1.5 -right-1.5 bg-emerald-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded leading-none">
-                  ES
-                </span>
-                <svg className="w-5 h-5 text-neutral-600 group-hover:text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span className="lang-badge es">ES</span>
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                 </svg>
               </button>
