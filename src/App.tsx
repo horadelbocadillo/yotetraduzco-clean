@@ -17,6 +17,11 @@ function App() {
 
   return (
     <>
+      {/* Skip link for keyboard accessibility */}
+      <a href="#main-content" className="skip-link">
+        Saltar al contenido principal
+      </a>
+
       {/* Header */}
       <header className="header">
         <div className="header-content">
@@ -33,7 +38,7 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="container">
+      <main id="main-content" className="container">
         {/* Translation Section */}
         <section className="section">
           <WordInput onWordAdded={handleWordAdded} />

@@ -35,9 +35,19 @@ export function WordList({ refreshTrigger }: WordListProps) {
     setLoading(false)
   }
 
+  // Fetch words immediately when refreshTrigger or categoryFilter changes
   useEffect(() => {
     fetchWords()
-  }, [refreshTrigger, search, categoryFilter])
+  }, [refreshTrigger, categoryFilter])
+
+  // Debounce search input - wait 300ms after user stops typing
+  useEffect(() => {
+    const debounceTimer = setTimeout(() => {
+      fetchWords()
+    }, 300)
+
+    return () => clearTimeout(debounceTimer)
+  }, [search])
 
   return (
     <>
