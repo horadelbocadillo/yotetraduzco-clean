@@ -14,6 +14,8 @@ export function WordList({ refreshTrigger }: WordListProps) {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const wordsPerPage = 10
 
   const fetchWords = async () => {
     setLoading(true)
@@ -38,16 +40,24 @@ export function WordList({ refreshTrigger }: WordListProps) {
   // Fetch words immediately when refreshTrigger or categoryFilter changes
   useEffect(() => {
     fetchWords()
+    setCurrentPage(1) // Reset to first page
   }, [refreshTrigger, categoryFilter])
 
   // Debounce search input - wait 300ms after user stops typing
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
       fetchWords()
+      setCurrentPage(1) // Reset to first page on search
     }, 300)
 
     return () => clearTimeout(debounceTimer)
   }, [search])
+
+  // Calculate pagination
+  const totalPages = Math.ceil(words.length / wordsPerPage)
+  const startIndex = (currentPage - 1) * wordsPerPage
+  const endIndex = startIndex + wordsPerPage
+  const currentWords = words.slice(startIndex, endIndex)
 
   return (
     <>
@@ -139,11 +149,68 @@ export function WordList({ refreshTrigger }: WordListProps) {
           <EmptyState />
         )
       ) : (
-        <div className="words-grid">
-          {words.map((word) => (
-            <WordCard key={word.id} word={word} onUpdate={fetchWords} />
-          ))}
-        </div>
+        <>
+          <div className="words-grid">
+            {currentWords.map((word) => (
+              <WordCard key={word.id} word={word} onUpdate={fetchWords} />
+            ))}
+          </div>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '1rem',
+              marginTop: '2rem',
+              paddingTop: '1.5rem',
+              borderTop: '1px solid var(--neutral-200)'
+            }}>
+              <button
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                style={{
+                  padding: '0.5rem 1rem',
+                  borderRadius: '8px',
+                  border: '1px solid var(--neutral-200)',
+                  background: currentPage === 1 ? 'var(--neutral-100)' : 'white',
+                  color: currentPage === 1 ? 'var(--neutral-400)' : 'var(--neutral-700)',
+                  cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+                  fontWeight: 500,
+                  fontSize: '0.875rem'
+                }}
+              >
+                Anterior
+              </button>
+
+              <span style={{
+                color: 'var(--neutral-600)',
+                fontSize: '0.875rem',
+                fontWeight: 500
+              }}>
+                Página {currentPage} de {totalPages}
+              </span>
+
+              <button
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                style={{
+                  padding: '0.5rem 1rem',
+                  borderRadius: '8px',
+                  border: '1px solid var(--neutral-200)',
+                  background: currentPage === totalPages ? 'var(--neutral-100)' : 'white',
+                  color: currentPage === totalPages ? 'var(--neutral-400)' : 'var(--neutral-700)',
+                  cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+                  fontWeight: 500,
+                  fontSize: '0.875rem'
+                }}
+              >
+                Siguiente
+              </button>
+            </div>
+          )}
+        </>
       )}
     </>
   )

@@ -1,0 +1,1 @@
+Contexto: hay situaciones en las que el traductor me devuelve un significado que no corresponde con el contexto de la palabra que estoy consultando porque tiene varias acepciones con lo que es bueno incorporar una opción de diccionario para que con los resultados sobre esa palabra, yo pueda seleccionar los distintos significados que tiene y que voy a ir aprendiendo

@@ -219,7 +219,7 @@ export function WordInput({ onWordAdded }: WordInputProps) {
               </svg>
             </button>
           </div>
-          <span className="arrow">→</span>
+          <span className="arrow">:</span>
           <div className="word-translation">
             <span>{preview.translation}</span>
             <button
