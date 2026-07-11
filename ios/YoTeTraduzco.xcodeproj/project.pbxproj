@@ -1,0 +1,497 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2307AFE49B7034852D4AB3F3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE43716C9E2A9DDD24C266C /* ContentView.swift */; };
+		27E006EBA6A4895FF17172B4 /* AddWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C87031F8B74A40341E1313E5 /* AddWordView.swift */; };
+		285C772FAA9B7F88B64DC878 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB85B8D28896AE95F1D5454B /* EmptyStateView.swift */; };
+		488C4F0C252E5E769001324E /* WordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0BA9E47F4711465423AED5 /* WordListView.swift */; };
+		4A947BA0F46427671E92FA84 /* SupabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FCBC13A8E46F14CCC451A7 /* SupabaseService.swift */; };
+		4E2BA13A1EB9C1EC0B8CF194 /* AddWordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A3102EEC30449B25274921 /* AddWordViewModel.swift */; };
+		5909E8D795CE445A10A0FDF2 /* WordListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFBEED8555B5431B6CDA7CE /* WordListViewModel.swift */; };
+		5B5491E033DE103FA033959A /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05990A6C65F9591943BEB04 /* SpeechService.swift */; };
+		67D33DFEC4AE6FFF2EBDE7AC /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62996A65B6081378FFD3F8A2 /* TranslationService.swift */; };
+		697708E40076F028E9D9356C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557BE87782DE7E91336530A6 /* Colors.swift */; };
+		75CB658619B3B3CEAE26AD6D /* WordCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D821E5DE9C766CAE98A5264 /* WordCardView.swift */; };
+		85940DC312F7835D61465F43 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9593A42939FD92FE420AD76 /* SettingsView.swift */; };
+		967306B99257C8B6E56F3127 /* CategoryPill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418F94135AE35D90968647E /* CategoryPill.swift */; };
+		9953C7E07BDE1AB2E19D8359 /* ClassificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374E878B351191AD35A7AB31 /* ClassificationService.swift */; };
+		BA973705F1E167CF322B0E00 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8B78CA0BA53A13435E9F03 /* AppSettings.swift */; };
+		CAA3CD8373E33E9B6DA59290 /* YoTeTraduzcoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C20FA07BC6FB686852520E6 /* YoTeTraduzcoApp.swift */; };
+		CFFAC2AEA4B4B939B1F204FF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CEB16905FBBF28F63188B8C /* Category.swift */; };
+		D7A111BCF505011E61774623 /* Palabra.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A8348ABA723E34C19827A /* Palabra.swift */; };
+		D9911DA6EBBB77DD7FF5B116 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5847529F08F696EFEBE34B13 /* Kingfisher */; };
+		EA6CD49B88622713BB8BF841 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = FD7F10D0BBF836FCA53277F4 /* Supabase */; };
+		EC12769B3DD44B78CFC6B3D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 078B065870155810EAFAD98D /* Assets.xcassets */; };
+		FCD888F949259E99031A905F /* WordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A74A23DB56AD6A0702A8921 /* WordDetailView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		00BBACD9C499F341B848F1F3 /* YoTeTraduzco.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = YoTeTraduzco.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		072A8348ABA723E34C19827A /* Palabra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palabra.swift; sourceTree = "<group>"; };
+		078B065870155810EAFAD98D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0C20FA07BC6FB686852520E6 /* YoTeTraduzcoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoTeTraduzcoApp.swift; sourceTree = "<group>"; };
+		0EE43716C9E2A9DDD24C266C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2D0BA9E47F4711465423AED5 /* WordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListView.swift; sourceTree = "<group>"; };
+		374E878B351191AD35A7AB31 /* ClassificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassificationService.swift; sourceTree = "<group>"; };
+		3D821E5DE9C766CAE98A5264 /* WordCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCardView.swift; sourceTree = "<group>"; };
+		3E7174268228150D7F707D72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5418F94135AE35D90968647E /* CategoryPill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPill.swift; sourceTree = "<group>"; };
+		557BE87782DE7E91336530A6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		5A74A23DB56AD6A0702A8921 /* WordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordDetailView.swift; sourceTree = "<group>"; };
+		62996A65B6081378FFD3F8A2 /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
+		67FCBC13A8E46F14CCC451A7 /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
+		6CEB16905FBBF28F63188B8C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		6FFBEED8555B5431B6CDA7CE /* WordListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListViewModel.swift; sourceTree = "<group>"; };
+		7A8B78CA0BA53A13435E9F03 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		C87031F8B74A40341E1313E5 /* AddWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordView.swift; sourceTree = "<group>"; };
+		C8A3102EEC30449B25274921 /* AddWordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWordViewModel.swift; sourceTree = "<group>"; };
+		CB85B8D28896AE95F1D5454B /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		D05990A6C65F9591943BEB04 /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
+		D9593A42939FD92FE420AD76 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		321BD7E3B43ABB8EB1088793 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA6CD49B88622713BB8BF841 /* Supabase in Frameworks */,
+				D9911DA6EBBB77DD7FF5B116 /* Kingfisher in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		000A921F855165B253731F2D = {
+			isa = PBXGroup;
+			children = (
+				7BD83CE3737B6BB24E868DDD /* YoTeTraduzco */,
+				54319C0144E0535B02CEA317 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5354CE46BD194F5FD1A19084 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				078B065870155810EAFAD98D /* Assets.xcassets */,
+				3E7174268228150D7F707D72 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		54319C0144E0535B02CEA317 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00BBACD9C499F341B848F1F3 /* YoTeTraduzco.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5EC844550ACF2BEF3C5BC400 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C87031F8B74A40341E1313E5 /* AddWordView.swift */,
+				D9593A42939FD92FE420AD76 /* SettingsView.swift */,
+				5A74A23DB56AD6A0702A8921 /* WordDetailView.swift */,
+				2D0BA9E47F4711465423AED5 /* WordListView.swift */,
+				CDA6970B04F9B5F2719A036F /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7BD83CE3737B6BB24E868DDD /* YoTeTraduzco */ = {
+			isa = PBXGroup;
+			children = (
+				A5232CAFCDFA6A1B5BFD70D5 /* App */,
+				E0350625807F86D02E9B11AD /* Extensions */,
+				A853E29ACB090A39AF33903E /* Models */,
+				5354CE46BD194F5FD1A19084 /* Resources */,
+				F8B19E852948A425918C5DE5 /* Services */,
+				897619F67D6AC6062373EB73 /* ViewModels */,
+				5EC844550ACF2BEF3C5BC400 /* Views */,
+			);
+			path = YoTeTraduzco;
+			sourceTree = "<group>";
+		};
+		897619F67D6AC6062373EB73 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C8A3102EEC30449B25274921 /* AddWordViewModel.swift */,
+				6FFBEED8555B5431B6CDA7CE /* WordListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		A5232CAFCDFA6A1B5BFD70D5 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0EE43716C9E2A9DDD24C266C /* ContentView.swift */,
+				0C20FA07BC6FB686852520E6 /* YoTeTraduzcoApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A853E29ACB090A39AF33903E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7A8B78CA0BA53A13435E9F03 /* AppSettings.swift */,
+				6CEB16905FBBF28F63188B8C /* Category.swift */,
+				072A8348ABA723E34C19827A /* Palabra.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CDA6970B04F9B5F2719A036F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				5418F94135AE35D90968647E /* CategoryPill.swift */,
+				CB85B8D28896AE95F1D5454B /* EmptyStateView.swift */,
+				3D821E5DE9C766CAE98A5264 /* WordCardView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E0350625807F86D02E9B11AD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				557BE87782DE7E91336530A6 /* Colors.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F8B19E852948A425918C5DE5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				374E878B351191AD35A7AB31 /* ClassificationService.swift */,
+				D05990A6C65F9591943BEB04 /* SpeechService.swift */,
+				67FCBC13A8E46F14CCC451A7 /* SupabaseService.swift */,
+				62996A65B6081378FFD3F8A2 /* TranslationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		98B34C9120BB6C2B5D95A0B7 /* YoTeTraduzco */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F316E6D1256E93D2A7C1EE5 /* Build configuration list for PBXNativeTarget "YoTeTraduzco" */;
+			buildPhases = (
+				7C2C08C1B1098E1D5E1F4D1F /* Sources */,
+				C05F529147E89C396F50AF81 /* Resources */,
+				321BD7E3B43ABB8EB1088793 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YoTeTraduzco;
+			packageProductDependencies = (
+				FD7F10D0BBF836FCA53277F4 /* Supabase */,
+				5847529F08F696EFEBE34B13 /* Kingfisher */,
+			);
+			productName = YoTeTraduzco;
+			productReference = 00BBACD9C499F341B848F1F3 /* YoTeTraduzco.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		64F185E2C61E91C704C7AB38 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					98B34C9120BB6C2B5D95A0B7 = {
+						DevelopmentTeam = "";
+					};
+				};
+			};
+			buildConfigurationList = E25F75A973FD349564107476 /* Build configuration list for PBXProject "YoTeTraduzco" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 000A921F855165B253731F2D;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				2C34CD30AD72F6CAAF535E4A /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				63FE9F6F3664F0E7A084B4C2 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 54319C0144E0535B02CEA317 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				98B34C9120BB6C2B5D95A0B7 /* YoTeTraduzco */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C05F529147E89C396F50AF81 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC12769B3DD44B78CFC6B3D7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7C2C08C1B1098E1D5E1F4D1F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27E006EBA6A4895FF17172B4 /* AddWordView.swift in Sources */,
+				4E2BA13A1EB9C1EC0B8CF194 /* AddWordViewModel.swift in Sources */,
+				BA973705F1E167CF322B0E00 /* AppSettings.swift in Sources */,
+				CFFAC2AEA4B4B939B1F204FF /* Category.swift in Sources */,
+				967306B99257C8B6E56F3127 /* CategoryPill.swift in Sources */,
+				9953C7E07BDE1AB2E19D8359 /* ClassificationService.swift in Sources */,
+				697708E40076F028E9D9356C /* Colors.swift in Sources */,
+				2307AFE49B7034852D4AB3F3 /* ContentView.swift in Sources */,
+				285C772FAA9B7F88B64DC878 /* EmptyStateView.swift in Sources */,
+				D7A111BCF505011E61774623 /* Palabra.swift in Sources */,
+				85940DC312F7835D61465F43 /* SettingsView.swift in Sources */,
+				5B5491E033DE103FA033959A /* SpeechService.swift in Sources */,
+				4A947BA0F46427671E92FA84 /* SupabaseService.swift in Sources */,
+				67D33DFEC4AE6FFF2EBDE7AC /* TranslationService.swift in Sources */,
+				75CB658619B3B3CEAE26AD6D /* WordCardView.swift in Sources */,
+				FCD888F949259E99031A905F /* WordDetailView.swift in Sources */,
+				488C4F0C252E5E769001324E /* WordListView.swift in Sources */,
+				5909E8D795CE445A10A0FDF2 /* WordListViewModel.swift in Sources */,
+				CAA3CD8373E33E9B6DA59290 /* YoTeTraduzcoApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		17AAE8A57A498739182C74E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = YoTeTraduzco/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yotetraduzco.YoTeTraduzco;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3D5C736005B453DD9AC3FF99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		75C1410D93C2D29FD8568E9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = YoTeTraduzco/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yotetraduzco.YoTeTraduzco;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A5355BF328AE9BF9FEA97897 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F316E6D1256E93D2A7C1EE5 /* Build configuration list for PBXNativeTarget "YoTeTraduzco" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				75C1410D93C2D29FD8568E9D /* Debug */,
+				17AAE8A57A498739182C74E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E25F75A973FD349564107476 /* Build configuration list for PBXProject "YoTeTraduzco" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5355BF328AE9BF9FEA97897 /* Debug */,
+				3D5C736005B453DD9AC3FF99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2C34CD30AD72F6CAAF535E4A /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+		63FE9F6F3664F0E7A084B4C2 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5847529F08F696EFEBE34B13 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C34CD30AD72F6CAAF535E4A /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		FD7F10D0BBF836FCA53277F4 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 63FE9F6F3664F0E7A084B4C2 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 64F185E2C61E91C704C7AB38 /* Project object */;
+}
