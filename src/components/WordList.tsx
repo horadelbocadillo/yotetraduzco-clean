@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import type { Word } from '../lib/supabase'
 import { supabase } from '../lib/supabase'
-import { CATEGORIES } from '../lib/constants'
+import { CATEGORIES, getCategory } from '../lib/constants'
 import { EmptyState } from './EmptyState'
-import { WordCard } from './WordCard'
+import { pronounceWord } from '../lib/utils'
+import { WordDetail } from './WordDetail'
 
 interface WordListProps {
   refreshTrigger: number
@@ -14,8 +15,7 @@ export function WordList({ refreshTrigger }: WordListProps) {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('')
-  const [currentPage, setCurrentPage] = useState(1)
-  const wordsPerPage = 10
+  const [selectedWord, setSelectedWord] = useState<Word | null>(null)
 
   const fetchWords = async () => {
     setLoading(true)
@@ -37,181 +37,149 @@ export function WordList({ refreshTrigger }: WordListProps) {
     setLoading(false)
   }
 
-  // Fetch words immediately when refreshTrigger or categoryFilter changes
   useEffect(() => {
     fetchWords()
-    setCurrentPage(1) // Reset to first page
   }, [refreshTrigger, categoryFilter])
 
-  // Debounce search input - wait 300ms after user stops typing
   useEffect(() => {
     const debounceTimer = setTimeout(() => {
       fetchWords()
-      setCurrentPage(1) // Reset to first page on search
     }, 300)
-
     return () => clearTimeout(debounceTimer)
   }, [search])
 
-  // Calculate pagination
-  const totalPages = Math.ceil(words.length / wordsPerPage)
-  const startIndex = (currentPage - 1) * wordsPerPage
-  const endIndex = startIndex + wordsPerPage
-  const currentWords = words.slice(startIndex, endIndex)
+  const handleDelete = async (id: number) => {
+    if (confirm('¿Eliminar esta palabra?')) {
+      await supabase.from('palabras').delete().eq('id', id)
+      fetchWords()
+    }
+  }
+
+  const getCategoryColor = (categoria: string | null) => {
+    const cat = getCategory(categoria)
+    return cat?.color || 'neutral'
+  }
 
   return (
-    <>
-      {/* Section Header */}
-      <div className="section-header">
-        <h2 className="section-title">Palabras guardadas</h2>
-        {!loading && words.length > 0 && (
-          <span className="word-count">
-            {words.length} {words.length === 1 ? 'palabra' : 'palabras'}
+    <div className="word-list-container">
+      {/* Header con contador y filtros */}
+      <div className="word-list-header">
+        <div className="word-list-title">
+          <span className="word-list-icon">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="18" height="18">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
           </span>
+          <span>Guardadas</span>
+          {!loading && (
+            <span className="word-count-badge">{words.length}</span>
+          )}
+        </div>
+
+        {/* Filtro de categoría */}
+        <select
+          value={categoryFilter}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+          className="category-filter"
+        >
+          <option value="">Todas</option>
+          {CATEGORIES.filter(c => c.value).map((cat) => (
+            <option key={cat.value} value={cat.value}>
+              {cat.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Barra de búsqueda */}
+      <div className="word-list-search">
+        <svg className="search-icon-small" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Buscar en tu biblioteca..."
+          className="search-input-compact"
+        />
+      </div>
+
+      {/* Lista de palabras */}
+      <div className="word-list-items">
+        {loading ? (
+          <div className="word-list-loading">
+            <div className="spinner-small"></div>
+            <span>Cargando...</span>
+          </div>
+        ) : words.length === 0 ? (
+          search || categoryFilter ? (
+            <div className="word-list-empty">
+              <span>No se encontraron palabras</span>
+            </div>
+          ) : (
+            <EmptyState />
+          )
+        ) : (
+          words.map((word) => {
+            const categoryData = getCategory(word.categoria)
+            const colorClass = getCategoryColor(word.categoria)
+
+            return (
+              <div
+                key={word.id}
+                className="word-item word-item-clickable"
+                onClick={() => setSelectedWord(word)}
+              >
+                <div className={`word-item-dot ${colorClass}`}></div>
+                <div className="word-item-content">
+                  <div className="word-item-header">
+                    <span className="word-item-original">{word.palabra_original}</span>
+                    <button
+                      className="word-item-speak"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        pronounceWord(word.palabra_original, 'en-US')
+                      }}
+                      title="Pronunciar"
+                    >
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="14" height="14">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                      </svg>
+                    </button>
+                    {categoryData && (
+                      <span className={`word-item-category ${colorClass}`}>
+                        {categoryData.label}
+                      </span>
+                    )}
+                  </div>
+                  <div className="word-item-translation">{word.traduccion}</div>
+                </div>
+                <button
+                  className="word-item-delete"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handleDelete(word.id)
+                  }}
+                  title="Eliminar"
+                >
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              </div>
+            )
+          })
         )}
       </div>
 
-      {/* Search and filter */}
-      {!loading && words.length > 0 && (
-        <div className="search-section">
-          <div className="search-wrapper">
-            <svg className="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Buscar en tus palabras..."
-              aria-label="Buscar palabras guardadas"
-              className="input"
-            />
-          </div>
-          <select
-            value={categoryFilter}
-            onChange={(e) => setCategoryFilter(e.target.value)}
-            aria-label="Filtrar por categoría"
-            className="filter-select"
-          >
-            <option value="">Todas las categorías</option>
-            {CATEGORIES.map((cat) => (
-              <option key={cat.value} value={cat.value}>
-                {cat.emoji} {cat.label}
-              </option>
-            ))}
-          </select>
-        </div>
+      {/* Modal de detalle */}
+      {selectedWord && (
+        <WordDetail
+          word={selectedWord}
+          onClose={() => setSelectedWord(null)}
+        />
       )}
-
-      {/* Loading state */}
-      {loading ? (
-        <div style={{ textAlign: 'center', padding: '5rem 0' }}>
-          <div style={{
-            display: 'inline-block',
-            width: '40px',
-            height: '40px',
-            border: '4px solid var(--neutral-200)',
-            borderTopColor: 'var(--indigo-500)',
-            borderRadius: '50%',
-            animation: 'spin 0.8s linear infinite'
-          }}></div>
-          <p style={{
-            marginTop: '1rem',
-            color: 'var(--neutral-500)',
-            fontSize: '0.875rem',
-            fontWeight: 500
-          }}>
-            Cargando palabras...
-          </p>
-          <style>{`
-            @keyframes spin {
-              to { transform: rotate(360deg); }
-            }
-          `}</style>
-        </div>
-      ) : words.length === 0 ? (
-        search || categoryFilter ? (
-          <div style={{ textAlign: 'center', padding: '4rem 1.5rem' }}>
-            <div style={{ fontSize: '4rem', marginBottom: '1rem', opacity: 0.2 }}>🔍</div>
-            <p style={{
-              color: 'var(--neutral-600)',
-              fontWeight: 500,
-              fontSize: '1.125rem',
-              marginBottom: '0.5rem'
-            }}>
-              No se encontraron palabras
-            </p>
-            <p style={{ color: 'var(--neutral-500)', fontSize: '0.875rem' }}>
-              Intenta con otros términos o filtra por otra categoría
-            </p>
-          </div>
-        ) : (
-          <EmptyState />
-        )
-      ) : (
-        <>
-          <div className="words-grid">
-            {currentWords.map((word) => (
-              <WordCard key={word.id} word={word} onUpdate={fetchWords} />
-            ))}
-          </div>
-
-          {/* Pagination Controls */}
-          {totalPages > 1 && (
-            <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '1rem',
-              marginTop: '2rem',
-              paddingTop: '1.5rem',
-              borderTop: '1px solid var(--neutral-200)'
-            }}>
-              <button
-                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-                style={{
-                  padding: '0.5rem 1rem',
-                  borderRadius: '8px',
-                  border: '1px solid var(--neutral-200)',
-                  background: currentPage === 1 ? 'var(--neutral-100)' : 'white',
-                  color: currentPage === 1 ? 'var(--neutral-400)' : 'var(--neutral-700)',
-                  cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
-                  fontWeight: 500,
-                  fontSize: '0.875rem'
-                }}
-              >
-                Anterior
-              </button>
-
-              <span style={{
-                color: 'var(--neutral-600)',
-                fontSize: '0.875rem',
-                fontWeight: 500
-              }}>
-                Página {currentPage} de {totalPages}
-              </span>
-
-              <button
-                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                disabled={currentPage === totalPages}
-                style={{
-                  padding: '0.5rem 1rem',
-                  borderRadius: '8px',
-                  border: '1px solid var(--neutral-200)',
-                  background: currentPage === totalPages ? 'var(--neutral-100)' : 'white',
-                  color: currentPage === totalPages ? 'var(--neutral-400)' : 'var(--neutral-700)',
-                  cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
-                  fontWeight: 500,
-                  fontSize: '0.875rem'
-                }}
-              >
-                Siguiente
-              </button>
-            </div>
-          )}
-        </>
-      )}
-    </>
+    </div>
   )
 }
