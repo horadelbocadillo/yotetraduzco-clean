@@ -30,3 +30,16 @@ dist-ssr
 
 # Netlify
 .netlify
+
+# Material personal y notas (no forman parte de la app)
+.obsidian/
+.claude/
+british/
+palabros/
+tech vocabulary/
+datos supabase.md
+*.db
+
+# Xcode
+xcuserdata/
+*.xcuserstate
