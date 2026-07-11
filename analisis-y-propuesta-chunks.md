@@ -1,6 +1,6 @@
-# Yo te traduzco — Análisis comparativo con Palabros y propuesta de evolución a app de chunks
+# Yo te traduzco — Análisis comparativo con Palabros y propuesta de evolución
 
-## 1. Análisis de Palabros
+## 1. Análisis de Palabros (basado en capturas reales)
 
 **App:** Palabros - Dictionary (iOS)
 **Developer:** Nacho Cerrato Ruiz (Sevilla)
@@ -8,68 +8,73 @@
 **Tamaño:** 9.1 MB | **Modelo:** Freemium (Pro: 3.99€/mes, 9.99€/año, 49.99€ lifetime)
 **Fuentes de datos:** RAE API (ES), Free Dictionary API (EN), Relycapp (backup EN)
 
-### Funcionalidades
+### Funcionalidades documentadas (capturas IMG_1120–IMG_1129)
 
-| Funcionalidad | Descripción | UX |
+| Pantalla | Funcionalidad | Detalles UX |
 |---|---|---|
-| **Dashboard (Home)** | Tarjetas resumen Saved/Learned con contadores y última palabra. Sección "Recent" con palabras consultadas. "Word of the day" | Tab principal. Información a un vistazo. Acceso rápido a recientes |
-| **Búsqueda de palabras** | Barra de búsqueda con lista de resultados mostrando nombre, categoría gramatical (badge de color) y definición truncada | Tab dedicada (lupa). Búsqueda inline con teclado |
-| **Ficha de palabra** | Palabra + categoría gramatical + definiciones numeradas con tipo (Intr., Trans., etc.). Botón guardar (✓ verde) y eliminar (papelera roja). Botón compartir | Vista detalle. Acciones claras y binarias |
-| **Library (Colección)** | Dos tabs: Saved / Learned. Contador de palabras. Lista con bullet de color por categoría. Icono de filtro por tipo gramatical | Tab dedicada (estantería). Filtro por: Nouns, Adjectives, Verbs, Adverbs |
-| **Review (Quiz)** | Modal: "Test your vocabulary" con selector de cantidad de palabras, modo Easy/Hard, formato 4 opciones 1 correcta | Acceso desde Library. Quiz de reconocimiento |
-| **Color-coding gramatical** | Consistente en toda la app: Noun (morado), Adjective (rosa), Verb (naranja), Adverb (verde) | Visual, inmediato, coherente |
-| **Settings / Data Sources** | APIs configurables, walkthrough, contacto, "Visual stats" | Panel modal desde Home |
+| **Dashboard** (IMG_1123) | Home con métricas: Saved (20), Learned (0). Sección "Recent" con últimas 5 palabras. "Word of the day" destacada | Tab principal. Información de progreso a un vistazo. Color-coded dots por categoría |
+| **Library — Saved** (IMG_1124) | Lista de 20 palabras guardadas. Cada entrada: bullet de color + palabra + definición truncada | Tab estantería. Scroll vertical. Filtrable por categoría |
+| **Library — Learned** (IMG_1125) | Tab separada para palabras graduadas. Vacía (0 words) — indica que el ciclo de aprendizaje existe pero no se ha completado | Misma estructura que Saved |
+| **Filtro por categoría** (IMG_1127) | Modal con: Nouns (circle morado), Adjectives (circle rosa), Verbs (circle naranja), Adverbs (circle verde) | Color-coding consistente en toda la app |
+| **Word detail** (IMG_1128) | Palabra "Sung", categoría "Noun", definiciones numeradas (1, 2, 3) con tipo (Intr., Trans.). Botones: guardar (✓ verde), eliminar (papelera roja), compartir | Vista detalle limpia. Acciones binarias claras |
+| **Quiz — Pregunta** (IMG_1120, 1121, 1122) | "Test your vocabulary". Barra de progreso (2/20). Palabra + categoría badge. 4 opciones de respuesta. Feedback: verde (correcto) / rojo (incorrecto) con definición | Formato reconocimiento. Progreso visible |
+| **Quiz — Setup** (IMG_1126) | Modal: selector cantidad de palabras (5, 10, 15, 20). Toggle Easy/Hard. Botón "Start review" | Configuración rápida pre-quiz |
+| **Settings** (IMG_1129) | Data sources: RAE API, Free Dictionary API, Relycapp. "Delete all words". About/Walkthrough | Panel de configuración simple |
 
 ### Lo que Palabros hace bien
 
-- Ciclo de aprendizaje cerrado: Guardar → Revisar → Graduar (Saved → Review → Learned)
-- Color-coding consistente en toda la app
-- Información mínima pero suficiente en cada nivel de detalle (lista → ficha)
-- Dark mode nativo
-- Sin ads
-- App muy ligera (9.1 MB)
+- **Ciclo de aprendizaje cerrado**: Guardar → Review quiz → Graduar (Saved → Learned)
+- **Color-coding gramatical** consistente en toda la app (dots en listas, badges en detail)
+- **Información progresiva**: lista (mínima) → detalle (completa) → quiz (activa)
+- **Dark mode nativo** bien implementado
+- **Ligereza**: 9.1 MB, sin ads, UI mínima
+- **Dashboard motivacional**: counters, recientes, palabra del día
 
-### Limitaciones para nuestro caso de uso
+### Limitaciones
 
-- La unidad es la **palabra individual**, no chunks ni expresiones
-- Las categorías son **gramaticales** (noun, verb), no funcionales
-- Las definiciones vienen de diccionarios genéricos, no de producción propia
-- El review es de **reconocimiento** (elige entre 4), no de **producción** (produce tú)
-- No hay contexto de uso, ni registro oral/escrito, ni correcciones
+- Unidad = palabra individual, no chunks ni expresiones
+- Categorías solo gramaticales (noun, verb, adjective, adverb)
+- Definiciones de diccionarios genéricos, sin producción propia
+- Review de **reconocimiento** (elige 1 de 4), no de **producción** (genera tú)
+- Sin contexto de uso propio ni notas personales
+- Sin imágenes ilustrativas
 
 ---
 
-## 2. Estado actual de "Yo te traduzco"
+## 2. Estado actual de "Yo te traduzco" (marzo 2026)
 
-**Stack:** React 19 + TypeScript + Tailwind CSS 4 + Supabase + Netlify
-**Tipografía:** Literata (serif, display) + DM Sans (sans, body)
-**Modo:** Light mode, web-first, responsive
+**Stack iOS:** SwiftUI + MVVM + Supabase + Kingfisher
+**Stack Web:** React 19 + TypeScript + Tailwind CSS 4 + Supabase + Netlify
 
-### Funcionalidades actuales
+### Funcionalidades implementadas
 
-| Funcionalidad | Descripción |
-|---|---|
-| **Input de traducción** | Campo de texto para palabra/frase EN, botón "Traducir", checkbox para imagen ilustrativa |
-| **Tarjetas de vocabulario** | Par EN→ES, pronunciación EN/ES, categoría con color + emoji, notas opcionales, editar/eliminar |
-| **Categorías** | Sustantivos, Verbos, Adjetivos, Expresiones, Tecnología (semánticas, no gramaticales) |
-| **Búsqueda y filtro** | Texto libre + dropdown por categoría |
-| **Diseño** | Color bar lateral por categoría, gradientes, toast notifications, empty state |
+| Funcionalidad | iOS | Web |
+|---|---|---|
+| **Traducción EN→ES** (DeepL) | ✅ | ✅ |
+| **Imagen ilustrativa** (Unsplash) | ✅ | ✅ |
+| **Pronunciación EN/ES** | ✅ AVSpeechSynthesizer | ✅ Web Speech API |
+| **Categorización automática** | ✅ Free Dictionary API | ❌ Manual |
+| **Categorías con color-coding** | ✅ 6 categorías, dots | ✅ 5 categorías, emoji+color |
+| **CRUD completo** | ✅ | ✅ |
+| **Búsqueda** | ✅ searchable | ✅ texto libre |
+| **Filtro por categoría** | ✅ Menu | ✅ dropdown |
+| **Edición inline** | ✅ categoría, notas, imagen | ✅ |
+| **Notas personales** | ✅ | ✅ |
+| **Dark mode** | ⚠️ Mecanismo existe, colores no adaptan | ❌ Solo light |
+| **Dashboard** | ❌ | ❌ |
+| **Quiz / Review** | ❌ | ❌ |
+| **Ciclo aprendizaje** | ❌ | ❌ |
+| **Estadísticas** | ❌ | ❌ |
+| **Palabra del día** | ❌ | ❌ |
 
-### Lo que tiene bien
+### Lo que tenemos mejor que Palabros
 
-- Stack moderno y mantenible
-- Diseño visual limpio y profesional
-- Supabase como backend propio (el contenido lo generas tú)
-- Estructura de tarjetas flexible
-- Responsive
-
-### Lo que le falta
-
-- **No hay ciclo de aprendizaje** — solo guardas y consultas
-- **No hay estado de progreso** — no sabes qué has automatizado y qué no
-- **Las categorías son genéricas** — "Expresiones" mete todo en el mismo saco
-- **No hay contexto de producción** — la tarjeta no captura por qué te cuesta ni qué error desplaza
-- **No hay mecanismo de repaso**
+- **Imágenes ilustrativas** — visual memory aid que Palabros no tiene
+- **Notas personales** — contexto propio, no solo definiciones de diccionario
+- **Traducción automática** — no solo búsqueda en diccionario
+- **Pronunciación en ambos idiomas** — Palabros solo muestra texto
+- **Clasificación automática inteligente** — phrasal verbs y frases hechas detectadas
+- **Stack propio** — Supabase como backend, contenido generado por el usuario
 
 ---
 
@@ -78,24 +83,44 @@
 | Aspecto | Palabros | Yo te traduzco |
 |---|---|---|
 | **Unidad** | Palabra individual | Palabra o frase |
-| **Fuente de datos** | APIs de diccionario externas | Producción propia + Supabase |
-| **Categorización** | Gramatical (noun, verb...) | Semántica (expresiones, tecnología...) |
+| **Fuente de datos** | APIs de diccionario | Producción propia + DeepL + Unsplash |
+| **Categorización** | Gramatical (4: noun, verb, adj, adv) | Gramatical+funcional (6: +phrasal verb, +frase hecha) |
+| **Imágenes** | No | Sí (Unsplash) |
+| **Notas** | No | Sí |
+| **Pronunciación** | No (solo texto) | Sí (EN + ES con audio) |
 | **Ciclo de aprendizaje** | Saved → Review → Learned | No existe |
-| **Tipo de review** | Reconocimiento (4 opciones) | No existe |
-| **Plataforma** | iOS nativa | Web app responsive |
-| **Dark mode** | Sí (nativo) | No (light mode) |
-| **Contexto de uso** | Definición de diccionario | Notas manuales opcionales |
-| **Progreso** | Contadores Saved/Learned | Solo contador de guardadas |
+| **Quiz** | Reconocimiento (4 opciones) | No existe |
+| **Dashboard** | Saved/Learned + recientes + word of day | No existe |
+| **Dark mode** | Sí (nativo, bien implementado) | Parcial (mecanismo ok, colores no adaptan) |
+| **Plataforma** | iOS nativa | iOS nativa + Web |
+| **Peso** | 9.1 MB | ~15 MB (estimado con Kingfisher) |
 
 ---
 
-## 4. Propuesta: evolución a app de chunks
+## 4. Propuesta de evolución
 
-### 4.1 Cambio de modelo de datos — la Chunk Card
+### Fase A: Paridad competitiva con Palabros
 
-La unidad deja de ser "palabra → traducción" y pasa a ser un **chunk** con metadatos de producción oral.
+Implementar las funcionalidades core que Palabros tiene y nosotros no:
 
-**Estructura de una chunk card:**
+1. **Dashboard** — contadores, recientes, palabra del día
+2. **Quiz de reconocimiento** — formato 4 opciones como Palabros
+3. **Ciclo Saved → Learned** — marcar palabras como aprendidas
+4. **Dark mode completo** — colores adaptativos
+
+### Fase B: Diferenciación (lo que Palabros no puede hacer)
+
+Aprovechar nuestras ventajas únicas:
+
+1. **Quiz de producción** — además del reconocimiento, que el usuario produzca la traducción
+2. **Review con imágenes** — aprovechar las imágenes como pista visual
+3. **Review con audio** — escuchar la palabra y producir la traducción
+4. **Estadísticas por categoría** — distribución visual del vocabulario
+5. **Repaso espaciado** — priorizar palabras antiguas sin practicar
+
+### Fase C: Evolución a chunk cards
+
+La unidad evoluciona de "palabra → traducción" a un **chunk con metadatos de producción oral**:
 
 ```
 ┌──────────────────────────────────────────────────┐
@@ -112,130 +137,26 @@ La unidad deja de ser "palabra → traducción" y pasa a ser un **chunk** con me
 │                                                  │
 │ EN VEZ DE DECIR:                                 │
 │ "But I have to say that..." ← traducción literal │
-│ del español "pero tengo que decir que..."        │
 │                                                  │
-│ FUENTE: Sesión Claude 15-mar                     │
 │ ESTADO: ○ Nuevo → ◐ Practicado → ● Automatizado │
 └──────────────────────────────────────────────────┘
 ```
 
-**Campos del modelo:**
+**Categorías funcionales** (sustituyen a las gramaticales para chunks):
 
-| Campo | Tipo | Descripción |
-|---|---|---|
-| `chunk` | string | La expresión en inglés |
-| `category` | enum | Muletillas pro, Combos que molan, Phrasal verbs, Frases hechas, Trucos de fábrica, Conectores |
-| `subcategory` | string | Función específica: concesión, adición, contraste, etc. |
-| `purpose` | string | Para qué sirve comunicativamente |
-| `my_example` | string | Frase de producción propia usándolo |
-| `instead_of` | string | La traducción literal del español que desplaza |
-| `spanish_equivalent` | string | Equivalente conceptual en español (referencia, no traducción) |
-| `source` | string | De dónde lo aprendiste (sesión Claude, podcast, conversación...) |
-| `status` | enum | new / practiced / automated |
-| `notes` | string | Notas adicionales, reglas, por qué suena mal la alternativa |
-| `created_at` | timestamp | Fecha de registro |
-| `last_reviewed` | timestamp | Última fecha de repaso |
-
-**Por qué el campo "en vez de decir" es clave:**
-
-No es un par de traducción. Es un par de **sustitución de hábito**. Captura la traducción literal que tu cerebro quiere producir desde el español y la pone al lado de la alternativa nativa. Cada vez que repasas, tu cerebro ve: "cuando quiero decir *pero tengo que decir que*, lo que debo producir es *having said that*."
-
-### 4.2 Categorías funcionales
-
-Sustituir las categorías genéricas por 6 categorías cercanas y funcionales:
-
-| Categoría              | Color       | Qué metes ahí                                                        |
+| Categoría              | Color       | Contenido                                                             |
 | ---------------------- | ----------- | --------------------------------------------------------------------- |
 | **Muletillas pro**     | Verde       | Hilar ideas sin sonar robot: *having said that, the thing is, I mean* |
-| **Combos que molan**   | Azul        | Parejas que van juntas sí o sí: *make a decision, heavy rain*         |
+| **Combos que molan**   | Azul        | Parejas que van juntas: *make a decision, heavy rain*                 |
 | **Phrasal verbs**      | Naranja     | Los de siempre: *come up with, figure out, put up with*               |
 | **Frases hechas**      | Violeta     | Bloques que se dicen tal cual: *it's no big deal, let's call it a day* |
 | **Trucos de fábrica**  | Rosa        | Patrones que multiplican vocabulario: *-ish, un-, over-*              |
-| **Conectores**         | Celeste     | Enganchar una idea con la siguiente: *on top of that, by the way*     |
+| **Conectores**         | Celeste     | Enganchar ideas: *on top of that, by the way*                        |
 
-Cada categoría puede tener subcategorías funcionales. Ejemplo para Muletillas pro: concesión (*having said that*), adición (*on top of that*), contraste (*then again*), conclusión (*at the end of the day*).
+**Campo clave "en vez de decir"**: no es traducción, es **sustitución de hábito**. Captura la traducción literal que tu cerebro quiere producir desde el español y la pone al lado de la alternativa nativa.
 
-### 4.3 Ciclo de aprendizaje
+### Fase D: Integración Claude
 
-Inspirado en Palabros (Saved → Review → Learned) pero adaptado a **producción oral**:
-
-```
-Nuevo → Practicado → Automatizado
-
-○ Nuevo: lo has registrado pero no lo has usado activamente
-◐ Practicando: lo has producido en contexto con esfuerzo consciente
-● Aprendido: te sale sin pensar en español primero
-```
-
-**Review basado en producción (no reconocimiento):**
-
-- La app te presenta una situación en español o el campo "en vez de decir" → tú produces el chunk
-- O te da el chunk → tú produces una frase completa usándolo en contexto
-- Self-grading: tú decides si lo has clavado / ha salido con esfuerzo / lo has fallado
-- Prioridad de repaso: los chunks con más tiempo sin practicar aparecen primero
-
-### 4.4 Dashboard con progreso
-
-Evolución del dashboard de Palabros:
-
-- Contadores: Nuevos / Practicando / Aprendidos
-- Distribución por categoría (cuántos discourse markers, cuántos collocations...)
-- Chunks que llevan más tiempo sin practicar (prioridad de repaso)
-- Racha de práctica diaria
-- "Chunk of the day" (aleatorio de los que necesitan refuerzo)
-
-### 4.5 Import desde sesiones Claude
-
-Al final de cada sesión de práctica, Claude genera un bloque con los chunks trabajados. Formato:
-
-```json
-{
-  "session_date": "2026-03-15",
-  "chunks": [
-    {
-      "chunk": "having said that",
-      "category": "discourse_marker",
-      "subcategory": "concession",
-      "purpose": "Introduce a contrasting or qualifying idea after a positive statement",
-      "my_example": "The app looks great. Having said that, the navigation needs work.",
-      "instead_of": "But I have to say that...",
-      "spanish_equivalent": "dicho esto / dicho lo cual",
-      "status": "practiced",
-      "notes": "Natural in conversational standard. Sounds less abrupt than 'but' or 'however'."
-    }
-  ]
-}
-```
-
-Opciones de import: copiar/pegar JSON, o en futuro endpoint API.
-
----
-
-## 5. Roadmap hacia iOS
-
-### Fase 1: Web app (lo que ya tienes)
-- Pivotar el modelo de datos de "palabra → traducción" a chunk card
-- Actualizar esquema de Supabase
-- Rediseñar las tarjetas con los nuevos campos
-- Implementar categorías funcionales con color-coding
-- Añadir estados (nuevo/practicado/automatizado)
-- Añadir import de sesiones Claude (JSON paste)
-
-### Fase 2: Review y progreso (web)
-- Implementar modo de review por producción
-- Dashboard con contadores y distribución
-- Filtros por categoría funcional y estado
-- Repaso espaciado (priorizar chunks sin practicar)
-
-### Fase 3: iOS nativa
-- SwiftUI + SwiftData
-- Misma estructura de Supabase como backend compartido (sync web ↔ iOS)
-- Tab bar: Home / History / Library / Search (similar a Palabros)
-- Widget de home screen con chunk para repasar
-- Notificaciones de repaso espaciado
-- Dark mode nativo
-
-### Fase 4: Integración Claude
-- Endpoint API para import automático de sesiones
-- Posibilidad de que la app llame a Claude para generar situaciones de práctica
-- Review asistido: Claude evalúa si tu producción es natural o suena a traducción
+- Import automático de chunks desde sesiones de práctica
+- Review asistido: Claude evalúa si tu producción suena natural
+- Generación de situaciones de práctica contextualizadas
