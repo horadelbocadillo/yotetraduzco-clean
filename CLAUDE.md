@@ -140,6 +140,19 @@ ADD COLUMN IF NOT EXISTS significados JSONB DEFAULT '[]';
 
 ## Historial de Cambios
 
+### 12 Julio 2026 - PWA + SRS (issues #1, #2, #16, #17)
+**PWA instalable** (b22c60f): vite-plugin-pwa (manifest + SW autoUpdate), iconos minimalistas en `public/`, meta tags iOS. Instalada y verificada en el iPhone de Guiomar. Deploy = push a `main` (Netlify auto-despliega).
+
+**SRS** (4c51050 + e1382b1): migración `add_srs_columns.sql` aplicada en producción; `src/lib/srs.ts` con la regla acordada: **fallo → vuelve al siguiente quiz; acierto → vuelve en 7 días; dominada con 3 aciertos netos**. El Quiz prioriza palabras con `proximo_repaso <= hoy` y guarda progreso por respuesta. `factor_facilidad` queda reservado (sin usar aún).
+
+**Bug arreglado**: preguntas consecutivas del mismo tipo heredaban estado React (faltaba `key` en Quiz.tsx) — el quiz se quedaba bloqueado.
+
+**Incidente resuelto**: las env vars de Netlify apuntaban a un Supabase muerto → diccionario vacío en producción. Corregidas vía CLI (sesión iniciada en este Mac). También hay token de Supabase CLI: la Management API (`POST /v1/projects/{ref}/database/query`) sirve para aplicar migraciones sin psql.
+
+**Verificación E2E**: quiz jugado con Playwright headless contra la BD real (script desechable), datos restaurados después. Así se destapó que **"delight" está duplicada** (ids 34 y 52) → justifica #20.
+
+**Estado del tablero**: cerradas #1 #2 #16 #17 · nuevas #20 (aviso de duplicados) y #21 (quiz con significados múltiples, alcance por definir con Guiomar) · **siguiente: #3 sesión de repaso diaria** ("Tienes N palabras para repasar hoy"). #18 medio hecha: instalación y datos verificados en iPhone real; falta probar micro/speech/push (condiciona M3).
+
 ### 9 Mayo 2026 - Quiz + Palabra del Día
 **Archivos creados:**
 - `src/components/WordOfTheDay.tsx`
