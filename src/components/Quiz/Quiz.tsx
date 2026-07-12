@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 import type { Word } from '../../lib/supabase'
+import { updateWordProgress, isDue } from '../../lib/srs'
 import { QuizSetup } from './QuizSetup'
 import { QuestionMultipleChoice } from './QuestionMultipleChoice'
 import { QuestionWriteAnswer } from './QuestionWriteAnswer'
@@ -66,8 +67,11 @@ export function Quiz({ onExit }: QuizProps) {
       words = words.filter(w => w.categoria === category)
     }
 
-    const shuffled = shuffleArray(words)
-    const selected = shuffled.slice(0, count)
+    // Prioridad SRS: primero las que tocan hoy (falladas o con repaso semanal
+    // cumplido), y si no llenan el quiz, se completa con el resto
+    const dueWords = shuffleArray(words.filter(w => isDue(w)))
+    const restWords = shuffleArray(words.filter(w => !isDue(w)))
+    const selected = [...dueWords, ...restWords].slice(0, count)
 
     // Dividir: primera mitad multiple choice, segunda mitad escribir
     const half = Math.ceil(count / 2)
@@ -106,6 +110,10 @@ export function Quiz({ onExit }: QuizProps) {
 
   const handleAnswer = (isCorrect: boolean, userAnswer: string) => {
     const currentQuestion = questions[currentIndex]
+
+    // Guardar el progreso SRS por respuesta: si se abandona el quiz a
+    // medias, lo ya contestado cuenta igualmente
+    void updateWordProgress(currentQuestion.word, isCorrect)
 
     setAnswers(prev => [
       ...prev,
@@ -153,6 +161,7 @@ export function Quiz({ onExit }: QuizProps) {
         <>
           {questions[currentIndex].type === 'multiple' ? (
             <QuestionMultipleChoice
+              key={questions[currentIndex].word.id}
               word={questions[currentIndex].word}
               options={questions[currentIndex].options!}
               questionNumber={currentIndex + 1}
@@ -161,6 +170,7 @@ export function Quiz({ onExit }: QuizProps) {
             />
           ) : (
             <QuestionWriteAnswer
+              key={questions[currentIndex].word.id}
               word={questions[currentIndex].word}
               questionNumber={currentIndex + 1}
               totalQuestions={questions.length}
