@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" fill="#4f46e5"/>
+
+  <!-- Bocadillo 1: blanco (inglés) -->
+  <g fill="#ffffff">
+    <rect x="180" y="240" width="470" height="310" rx="76"/>
+    <path d="M290 540 L252 662 L430 545 Z"/>
+  </g>
+  <!-- puntos del bocadillo 1 -->
+  <g fill="#4f46e5">
+    <circle cx="320" cy="395" r="34"/>
+    <circle cx="415" cy="395" r="34"/>
+    <circle cx="510" cy="395" r="34"/>
+  </g>
+
+  <!-- Bocadillo 2: esmeralda (español), solapado con borde del fondo -->
+  <g>
+    <rect x="440" y="510" width="430" height="290" rx="70" fill="#10b981" stroke="#4f46e5" stroke-width="26"/>
+    <path d="M760 792 L800 906 L636 796 Z" fill="#10b981"/>
+  </g>
+  <!-- puntos del bocadillo 2 -->
+  <g fill="#ffffff">
+    <circle cx="570" cy="655" r="30"/>
+    <circle cx="655" cy="655" r="30"/>
+    <circle cx="740" cy="655" r="30"/>
+  </g>
+</svg>
