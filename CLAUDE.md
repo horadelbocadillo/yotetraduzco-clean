@@ -67,10 +67,15 @@ Aplicación multiplataforma para aprender vocabulario inglés → español. Perm
 ## Credenciales
 
 ### Supabase
-- **URL**: `https://zgdrfdrsiulankhbyrtc.supabase.co`
+- **URL**: `https://mafbuoicsxaonfsxprip.supabase.co` (proyecto VIVO, con los datos — el de `.env`)
 - **Proyecto**: yotetraduzco_clean
 - **Tabla principal**: `palabras`
-- **Panel SQL**: https://supabase.com/dashboard/project/zgdrfdrsiulankhbyrtc/sql
+- **Panel SQL**: https://supabase.com/dashboard/project/mafbuoicsxaonfsxprip/sql
+- ⚠️ Proyectos MUERTOS (Supabase los pausó/borró, no usar): `zgdrfdrsiulankhbyrtc` (aún hardcodeado en la app iOS), `mdjswqgqxnbyxnpmflos` (estaba en las env vars de Netlify hasta jul 2026)
+
+### Netlify
+- **Sitio en producción**: `yotetraduzco` (https://yotetraduzco.netlify.app) — deploy automático desde GitHub `main`
+- **Sitio huérfano**: `glittery-crumble-c78529` — duplicado antiguo, candidato a borrar
 
 ### APIs (via Netlify Functions)
 - **DeepL**: Traducción EN→ES
